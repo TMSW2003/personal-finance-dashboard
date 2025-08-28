@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import Header from './header.jsx';
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -34,16 +35,16 @@ const Signup = () => {
 
   return (
     <div>
-      <form onSubmit={handleSignUp} className="max-w-md m-auto pt-24">
+      <Header/>
+      <form onSubmit={handleSignUp} className="max-w-md m-auto ">
         <h2 className="font-bold pb-2">Sign Up</h2>
         <p>
           Already have an account? <Link to="/">Sign in</Link>
         </p>
         <div className="flex flex-col py-4">
-          {/* <label htmlFor="Email">Email</label> */}
           <input
             onChange={(e) => setEmail(e.target.value)}
-            className="p-3 mt-2"
+            className="p-3 mt-1 border rounded"
             type="email"
             name="email"
             id="email"
@@ -51,10 +52,9 @@ const Signup = () => {
           />
         </div>
         <div className="flex flex-col py-4">
-          {/* <label htmlFor="Email">Email</label> */}
           <input
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-3 mt-2"
+            onChange={(e) => setFirstname(e.target.value)}
+            className="p-3 mt-0 border rounded"
             type="firstname"
             name="firstname"
             id="firstname"
@@ -62,10 +62,9 @@ const Signup = () => {
           />
         </div>
         <div className="flex flex-col py-4">
-          {/* <label htmlFor="Email">Email</label> */}
           <input
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-3 mt-2"
+            onChange={(e) => setLastname(e.target.value)}
+            className="p-3 mt-0 border rounded"
             type="lastname"
             name="lastname"
             id="lastname"
@@ -73,17 +72,16 @@ const Signup = () => {
           />
         </div>
         <div className="flex flex-col py-4">
-          {/* <label htmlFor="Password">Password</label> */}
           <input
             onChange={(e) => setPassword(e.target.value)}
-            className="p-3 mt-2"
+            className="p-3 mt-0 border rounded"
             type="password"
             name="password"
             id="password"
             placeholder="Password"
           />
         </div>
-        <button type="submit" disabled={loading} className="w-full mt-4">
+        <button type="submit" disabled={loading} className="w-full mt-2">
           Sign Up
         </button>
         {error && <p className="text-red-600 text-center pt-4">{error}</p>}

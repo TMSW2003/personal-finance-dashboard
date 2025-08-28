@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import Header from './header.jsx';
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   //const [loading, setLoading] = useState(false);
-  const [showForgot, setShowForgot] = useState(false);
   const [forgotEmail, setForgotEmail] = useState("");
-  const [forgotMessage, setForgotMessage] = useState("");
-
   const { signInUser } = UserAuth();
   const navigate = useNavigate();
 
@@ -35,36 +33,19 @@ const Signin = () => {
       setError(""); // Reset the error when there's a session
     }
   };
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-    setForgotMessage("");
-    setError(null);
-
-    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
-      redirectTo: "http://localhost:5173/reset-password",
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
-      setForgotMessage("Password reset email sent! Check your inbox.");
-      setForgotEmail("");
-    }
-  };
   
-
   return (
     <div>
-      <form onSubmit={handleSignIn} className="max-w-md m-auto pt-24">
+      <Header/>
+      <form onSubmit={handleSignIn} className="max-w-md m-auto">
         <h2 className="font-bold pb-2">Sign in</h2>
         <p>
           Don't have an account yet? <Link to="/signup">Sign up</Link>
         </p>
         <div className="flex flex-col py-4">
-          {/* <label htmlFor="Email">Email</label> */}
           <input
             onChange={(e) => setEmail(e.target.value)}
-            className="p-3 mt-2"
+            className="p-3 mt-1 border rounded"
             type="email"
             name="email"
             id="email"
@@ -72,17 +53,16 @@ const Signin = () => {
           />
         </div>
         <div className="flex flex-col py-4">
-          {/* <label htmlFor="Password">Password</label> */}
           <input
             onChange={(e) => setPassword(e.target.value)}
-            className="p-3 mt-2"
+            className="p-3 mt-0 border rounded"
             type="password"
             name="password"
             id="password"
             placeholder="Password"
           />
         </div>
-        <button className="w-full mt-4">Sign In</button>
+        <button className="w-full mt-2">Sign In</button>
         <p
           className="text-sm text-right mt-3"
           onClick={() => navigate("/forgot-password")}
@@ -94,9 +74,6 @@ const Signin = () => {
             Forgot password?
           </Link>
         </p>
-        
-
-      
         {error && <p className="text-red-600 text-center pt-4">{error}</p>}
       </form>
     </div>

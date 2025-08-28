@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
+import Header from '../components/header.jsx';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -40,27 +41,30 @@ export default function ForgotPassword() {
   }, [message, error]);
 
   return (
-    <div className="max-w-md mx-auto mt-24 p-6 bg-white rounded-xl shadow">
-      <h2 className="text-2xl font-bold mb-4 text-center">Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className="w-full p-3 border rounded mb-3 text-black"
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700"
-        >
-          Send Reset Link
-        </button>
-      </form>
+    <>
+      <Header/>
+      <div className="max-w-md mx-auto">
+        <h2 className="text-lg font-bold mb-8 ">Forgot Password</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="w-full p-3 border rounded mb-3 "
+            required
+          />
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700"
+          >
+            Send Reset Link
+          </button>
+        </form>
 
-      {message && <p className="text-green-600 mt-3">{message}</p>}
-      {error && <p className="text-red-600 mt-3">{error}</p>}
-    </div>
+        {message && <p className="text-green-600 mt-3">{message}</p>}
+        {error && <p className="text-red-600 mt-3">{error}</p>}
+      </div>
+    </>
   );
 }

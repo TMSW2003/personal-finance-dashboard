@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
+import Layout from "../components/layout";
 
 const Dashboard = () => {
   const { session, signOut } = UserAuth();
@@ -19,7 +20,8 @@ const Dashboard = () => {
   console.log(session);
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Layout/>
+      {/*<h1>Dashboard</h1>
       <h2>Welcome, {session?.user?.email}</h2>
       <div>
         <p
@@ -28,7 +30,7 @@ const Dashboard = () => {
         >
           Sign out
         </p>
-      </div>
+      </div>*/}
     </div>
   );
 };

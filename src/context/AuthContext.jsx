@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [session, setSession] = useState(undefined);
+  const [session, setSession] = useState(null);
 
   // Sign up
   const signUpNewUser = async (email, password, firstname, lastname) => {
@@ -47,7 +47,7 @@ export const AuthContextProvider = ({ children }) => {
       return { success: true, data }; // Return the user data
     } catch (error) {
       // Handle unexpected issues
-      console.error("Unexpected error during sign-in:", err.message);
+      console.error("Unexpected error during sign-in:", error.message);
       return {
         success: false,
         error: "An unexpected error occurred. Please try again.",
